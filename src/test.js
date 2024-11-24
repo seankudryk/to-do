@@ -28,16 +28,27 @@ export const getTodoList = () => {
 
 export const displayEntry = () => {
     const todoDisplayDiv = document.querySelector("#to-do-display-div")
-    const titleInput = document.querySelector("#title-input").value;
+    const titleInput = document.querySelector("#title-input");
     const descriptionInput = document.querySelector("#description-input");
-    const dueDateInput = document.querySelector("#due-date-input");
+    const dueDateInput = document.querySelector("#due-date-inputx");
     const priorityInput = document.querySelector("#priority-input");
     const notesInput = document.querySelector("#notes-input");
     const checklistInput = document.querySelector("#checklist-input");
     const newDiv = document.createElement("div");
+    const newSubDiv = document.createElement("div");
+
+    newDiv.appendChild(newSubDiv);
+    newDiv.classList.add("output-div");
+
+    const titleOutput = document.createElement("p");
+    const descriptionOutput = document.createElement("p");
+    const dueDateOutput = document.createElement("p");
+    const priorityOutput = document.createElement("p");
+    const notesOutput = document.createElement("p");
+    const checklistOutput = document.createElement("p");
 
     todoDisplayDiv.appendChild(newDiv);
 
-    console.log(titleInput);
+    console.log(titleInput.value);
 }
 
