@@ -1,8 +1,4 @@
-export const test = (string) => {
-    console.log(`${string} was the user input!`);
-}
-// export const sampleTask = new Todo("idk", "whatever", "i dont care", "none", "naw", "no thanks");
-const todoList = [];
+const todoList = []; //this array will store all of the to-do objects, everything to do with application data will be stored here, and then referenced to create the DOM
 
 export const createNewEntry = (title, description, dueDate, priority, notes, checklist) => {
 
@@ -10,30 +6,24 @@ export const createNewEntry = (title, description, dueDate, priority, notes, che
         constructor(title, description, dueDate, priority, notes, checklist) {
             this.title = title;
             this.description = description;
-            this.dueDate = dueDate;
+            this.dueDate = dueDate; 
             this.priority = priority;
             this.notes = notes;
             this.checklist = checklist;
         }
     }
-
-    // const newEntry = new Todo("idk", "whatever", "i dont care", "none", "naw", "no thanks");
     const newEntry = new Todo(title, description, dueDate, priority, notes, checklist);
     todoList.push(newEntry);
 }
 
 export const getTodoList = () => {
     console.log(todoList);
+    // return todoList.length;
 }
 
 export const displayEntry = () => {
     const todoDisplayDiv = document.querySelector("#to-do-display-div")
-    const titleInput = document.querySelector("#title-input");
-    const descriptionInput = document.querySelector("#description-input");
-    const dueDateInput = document.querySelector("#due-date-inputx");
-    const priorityInput = document.querySelector("#priority-input");
-    const notesInput = document.querySelector("#notes-input");
-    const checklistInput = document.querySelector("#checklist-input");
+    
     const newDiv = document.createElement("div");
     const newSubDiv = document.createElement("div");
 
@@ -48,7 +38,5 @@ export const displayEntry = () => {
     const checklistOutput = document.createElement("p");
 
     todoDisplayDiv.appendChild(newDiv);
-
-    console.log(titleInput.value);
 }
 

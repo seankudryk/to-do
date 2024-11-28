@@ -1,12 +1,26 @@
 import "./styles.css"
 import { test, createNewEntry, getTodoList, displayEntry } from "./test.js";
 
-test("test");
-
-createNewEntry("idk", "whatever", "i dont care", "none", "naw", "no thanks");
-createNewEntry(2, "whatever", "i dont care", "none", "naw", true);
-getTodoList();
+const titleInput = document.querySelector("#title-input");
+const descriptionInput = document.querySelector("#description-input");
+const dueDateInput = document.querySelector("#due-date-input");
+const priorityInput = document.querySelector("#priority-input");
+const notesInput = document.querySelector("#notes-input");
+const checklistInput = document.querySelector("#checklist-input");
 
 const submitButton = document.querySelector("#submit-button");
 
-submitButton.addEventListener("click", displayEntry);
+const resetInputs = () => {
+    titleInput.value = "";
+    descriptionInput.value = "";
+    dueDateInput.value = "";
+    priorityInput.value = "";
+    notesInput.value = "";
+    checklistInput.value = "";
+}
+
+submitButton.addEventListener("click", () => {
+    createNewEntry(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value, notesInput.value, checklistInput.value);
+    getTodoList();
+    resetInputs();
+});
