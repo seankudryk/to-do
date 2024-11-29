@@ -1,5 +1,5 @@
 import "./styles.css"
-import { test, createNewEntry, getTodoList, displayEntry } from "./test.js";
+import { createNewEntry, getTodoList, displayEntry } from "./test.js";
 
 const titleInput = document.querySelector("#title-input");
 const descriptionInput = document.querySelector("#description-input");
@@ -22,5 +22,6 @@ const resetInputs = () => {
 submitButton.addEventListener("click", () => {
     createNewEntry(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value, notesInput.value, checklistInput.value);
     getTodoList();
+    displayEntry();
     resetInputs();
 });
