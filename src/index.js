@@ -1,5 +1,5 @@
 import "./styles.css"
-import { createNewEntry, getTodoList, displayEntry, displayNewProject } from "./test.js";
+import { createNewEntry, getTodoList, displayEntry, addProject, getProjectList, displayNewProject } from "./test.js";
 
 const titleInput = document.querySelector("#title-input");
 const descriptionInput = document.querySelector("#description-input");
@@ -12,7 +12,10 @@ const sideBar = document.querySelector("#sidebar");
 
 const submitButton = document.querySelector("#submit-button");
 const createProjectButton = document.querySelector("#create-project-button");
-const projectNameSubmitButton = document.querySelector("");
+const projectNameInput = document.querySelector("#project-name-input");
+const projectNameSubmitButton = document.querySelector("#project-name-submit-button");
+const modal = document.querySelector(".modal");
+
 
 const resetInputs = () => {
     titleInput.value = "";
@@ -30,12 +33,12 @@ submitButton.addEventListener("click", () => {
 });
 
 createProjectButton.addEventListener ("click", () => {
-    const modal = document.querySelector(".modal");
-    // const projectNameSubmitButton = document.querySelector("#project-name-submit-button");
-    
     modal.style.display = "flex";
-    // projectNameSubmitButton.addEventListener("click", () => {
-    //     modal.style.display = "none";
-    // });
 });
 
+projectNameSubmitButton.addEventListener("click", () => {
+    addProject(projectNameInput.value);
+    getProjectList();
+    modal.style.display = "none";
+    projectNameInput.value = "";
+});
