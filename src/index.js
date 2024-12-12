@@ -1,5 +1,6 @@
 import "./styles.css"
-import { createNewEntry, getTodoList, displayEntry, addProject, getProjectList, displayNewProject } from "./test.js";
+import { createNewEntry, getTodoList, addProject, getProjectList } from "./app-logic.js";
+import { displayNewProject, displayProjects, displayEntry, doesThisWork } from "./display.js";
 
 const titleInput = document.querySelector("#title-input");
 const descriptionInput = document.querySelector("#description-input");
@@ -27,8 +28,10 @@ const resetInputs = () => {
 }
 
 submitButton.addEventListener("click", () => {
+    const todoList = getTodoList(); //getter
+
     createNewEntry(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value, notesInput.value, checklistInput.value, projectInput.value);
-    displayEntry();
+    displayEntry(todoList);
     resetInputs();
 });
 
@@ -37,8 +40,12 @@ createProjectButton.addEventListener ("click", () => {
 });
 
 projectNameSubmitButton.addEventListener("click", () => {
+    const projectList = getProjectList();
+
     addProject(projectNameInput.value);
-    getProjectList();
     modal.style.display = "none";
     projectNameInput.value = "";
+    displayProjects(projectList);
+    //create a delete button within the entry with an event listener to remove the entry if clicked
 });
+
