@@ -12,7 +12,7 @@
         <div id="sidebar">
             <button id="create-project-button">Create New Project</button>
             <div id="project-display-div">
-                <span id="all-projects">All Projects</span>
+                <span id="all-projects" class="project-span active-project">All Projects</span>
             </div>
         </div>
         <div id="project-name-entry-modal" class="modal">
@@ -49,6 +49,7 @@
                 <div id="project-input-container" class="input-container">
                     <label for="project-input">Project:</label>
                     <select id="project-input" name="project-input">
+                        <option></option>
                     </select>
                 </div>
                 <button type="submit" id="submit-button">Submit</button>

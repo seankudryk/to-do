@@ -40,7 +40,7 @@ export const displayEntry = (entries) => {
     descriptionOutputData.textContent = entries[entries.length - 1].description;
     descriptionOutputDiv.append(descriptionOutputHeader, descriptionOutputData);
 
-    //build display container for due date data
+    //build display container for due date datas
     const dueDateOutputDiv = document.createElement("div");
     const dueDateOutputHeader = document.createElement("h3");
     const dueDateOutputData = document.createElement("p");
@@ -76,6 +76,7 @@ export const displayEntry = (entries) => {
     const projectOutputDiv = document.createElement("div");
     const projectOutputHeader = document.createElement("h3");
     const projectOutputData = document.createElement("select");
+
     //we aren't there yet, but this should ALWAYS dynamically create the select options for project based on the current existingproject values
 
 
