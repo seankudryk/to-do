@@ -88,3 +88,13 @@ export const displayEntry = (entries) => {
 
     todoDisplayDiv.appendChild(newDiv);
 }
+
+export const displaySelectOptions = (option) => {
+    const projectSelector = document.querySelector("#project-input");
+
+    const newOption = document.createElement("option");
+    // newOption.setAttribute("id", `${option}`);
+    newOption.textContent = `${option}`;
+
+    projectSelector.appendChild(newOption);
+}
