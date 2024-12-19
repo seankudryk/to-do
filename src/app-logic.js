@@ -8,7 +8,6 @@ export const getProjectList = () => projectList;
 export const getActiveProject = () => activeProject;
 
 export const setActiveProject = (newValue) => {
-    console.log(activeProject);
     activeProject = newValue; 
     // console.log(activeProject);
 }

@@ -59,7 +59,9 @@ projectDisplayDiv.addEventListener("click", (e) => {
     const activeProject = getActiveProject();
 
     if (target.textContent === activeProject) {
-        
+        console.log("You just clicked the same element as is active");
+    } else {
+        console.log("You clicked a different element than was active");
     }
 
     setActiveProject(target.textContent);
