@@ -1,5 +1,5 @@
 const todoList = []; //this array will store all of the to-do objects, everything to do with application data will be stored here, and then referenced to create the DOM
-const projectList = ["All Projects"]; //this array will store all array project names, these will be referenced to display different selectable projects in the sidebar
+const projectList = []; //this array will store all array project names, these will be referenced to display different selectable projects in the sidebar
 let activeProject = "All Projects";
 
 export const getTodoList = () => todoList; //getter function 
@@ -8,8 +8,7 @@ export const getProjectList = () => projectList;
 export const getActiveProject = () => activeProject;
 
 export const setActiveProject = (newValue) => {
-    activeProject = newValue; 
-    // console.log(activeProject);
+    activeProject = newValue;
 }
 
 export const addTodoList = (newTodoList) => todoList.push(newTodoList);

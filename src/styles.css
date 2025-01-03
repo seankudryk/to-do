@@ -11,6 +11,16 @@
     margin: 10px;
 }
 
+#project-name {
+    padding-bottom: 25px;
+}
+
+.entry-div div {
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 #sidebar {
     display: flex;
     flex-direction: column;
@@ -53,7 +63,6 @@
 
 .modal {
     display: none; 
-
     z-index: 1;
 }
 

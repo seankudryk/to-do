@@ -4,3 +4,6 @@ Current Task:
 - Figure out how to get the project in #project-display-div to update and change which project is active on click.
 - There is a .active-project css class which will need to be cleared and re-assigned each time a new project is clicked. Make sure that this tracks with the user actions properly
 - Once this is set up, the project select element in #input-container will need to update the select options with all values in the projectList array
+
+- Implement localStorage, tests work differently for standard browser pages and incognito browser pages, so tests in incognito may not be able to retrieve key value pairs from the Storage objective
+- 

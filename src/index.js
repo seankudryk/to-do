@@ -1,7 +1,7 @@
 import "./styles.css"
 import { createNewEntry, getTodoList, addProject, getProjectList, getActiveProject, setActiveProject } from "./app-logic.js";
-import { displayNewProject, displayProjects, displayEntry, displaySelectOptions } from "./display.js";
-import { all } from "neo-async";
+import { displayNewProject, displayProjects, displayEntry, displaySelectOptions, clearEntryDisplay } from "./display.js";
+import { all, filter } from "neo-async";
 
 const titleInput = document.querySelector("#title-input");
 const descriptionInput = document.querySelector("#description-input");
@@ -36,8 +36,6 @@ submitButton.addEventListener("click", () => {
     createNewEntry(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value, notesInput.value, checklistInput.value, projectInput.value);
     displayEntry(todoList);
     resetInputs();
-
-    console.log(todoList);
 });
 
 createProjectButton.addEventListener ("click", () => {
@@ -54,26 +52,35 @@ projectNameSubmitButton.addEventListener("click", () => {
     displaySelectOptions(projectList[projectList.length - 1]);
     //create a delete button within the entry with an event listener to remove the entry if clicked
     //there will need to be a function which updates the selectable project values in HTML select element each time a new project is created
-
 });
 
 projectDisplayDiv.addEventListener("click", (e) => {
     let target = e.target;
 
+    const todoList = getTodoList();
+
     //remove .active-project from all projects when the event listener is called, this will be reapplied to the clicked project after it has been cleared from all others
     const allProjects = document.querySelectorAll(".project-span");
     allProjects.forEach((project) => project.classList.remove("active-project"));
 
-    const activeProject = getActiveProject();
+    let activeProject = getActiveProject();
 
-    if (target.textContent === activeProject) {
-        console.log("You just clicked the same element as is active");
-    } else {
-        //apply .active-project class to the target
-        target.classList.add("active-project");
-        setActiveProject(target.textContent);
-        console.log("You clicked a different element than was active");
-    } 
+    //apply .active-project class to the target
+    target.classList.add("active-project");
+    setActiveProject(target.textContent);
+    activeProject = target.textContent;
 
+    clearEntryDisplay();
+
+    console.log(`${getActiveProject()} is the current active project`);
+
+    //best bet is likely to just create a filter array to display entry based off of 
+    const filteredProjectEntries = todoList.filter((entry) => entry.project === activeProject);
+    displayEntry(filteredProjectEntries);
+    console.log(filteredProjectEntries);
+
+    // console.log(todoList[0].title);
+
+    console.log(`${getActiveProject()} is the current active project`);
     //call display function to reset the projects listed based on the current value of activeProject
 });
