@@ -8,14 +8,14 @@ export const displayNewProject = () => {
 }
 
 export const displayProjects = (projects) => {
-    const projectDisplayDiv = document.querySelector("#project-display-div");
+    const userProjects = document.querySelector("#user-projects");
 
     const newSpan = document.createElement("span");
     newSpan.classList.add("project-span");
 
     newSpan.textContent = projects[projects.length - 1];
 
-    projectDisplayDiv.appendChild(newSpan);
+    userProjects.appendChild(newSpan);
 }
 
 export const displayEntry = (entries) => {
@@ -80,13 +80,22 @@ export const displayEntry = (entries) => {
             const projectOutputData = document.createElement("p");
         
             //we aren't there yet, but this should ALWAYS dynamically create the select options for project based on the current existingproject values
-        
-        
+            
+            //create Delete Button
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.setAttribute("id", "delete-button");
+
+            //create Edit Button
+            const editButton = document.createElement("button");
+            editButton.textContent = "Edit";
+            editButton.setAttribute("id", "edit-button");
+
             projectOutputHeader.textContent = "Project:";
             projectOutputData.textContent = entry.project;
             projectOutputDiv.append(projectOutputHeader, projectOutputData);
         
-            newDiv.append(titleOutputDiv, descriptionOutputDiv, dueDateOutputDiv, priorityOutputDiv, notesOutputDiv, checklistOutputDiv, projectOutputDiv);
+            newDiv.append(titleOutputDiv, descriptionOutputDiv, dueDateOutputDiv, priorityOutputDiv, notesOutputDiv, checklistOutputDiv, projectOutputDiv, deleteButton, editButton);
         
             todoDisplayDiv.appendChild(newDiv);
         })
