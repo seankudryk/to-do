@@ -32,7 +32,7 @@ export const createNewEntry = (title, description, dueDate, priority, notes, che
 };
 
 export const deleteEntry = () => {
-    return "This will eventually do something";
+    //click event listener called by click delete button
 }
 
 

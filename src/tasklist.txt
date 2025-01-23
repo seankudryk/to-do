@@ -6,4 +6,5 @@ Current Task:
 - Once this is set up, the project select element in #input-container will need to update the select options with all values in the projectList array
 
 - Implement localStorage, tests work differently for standard browser pages and incognito browser pages, so tests in incognito may not be able to retrieve key value pairs from the Storage objective
-- 
+
+
