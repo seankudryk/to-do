@@ -22,6 +22,7 @@ const modal = document.querySelector(".modal");
 const projectDisplayDiv = document.querySelector("#project-display-div");
 const userProjects = document.querySelector("#user-projects");
 const testButton = document.querySelector("#test-button");
+const todoDisplayDiv = document.querySelector("#to-do-display-div");
 
  
 const resetInputs = () => {
@@ -104,3 +105,17 @@ userProjects.addEventListener("click", (e) => {
     console.log(`${getActiveProject()} is the current active project`);
     //call display function to reset the projects listed based on the current value of activeProject
 });
+
+testButton.addEventListener("click", () => {
+    console.log(getTodoList());
+});
+
+todoDisplayDiv.addEventListener("click", (e) => {
+    const [...deleteButton] = document.querySelectorAll(".delete-button");
+
+    if (deleteButton.includes(target)) {
+        //remove the parent entry-div of this target delete button
+        //splice index number which matches the id value of the parent entry-div of this target delete button
+        //call displayEntry and reset display
+    };
+})

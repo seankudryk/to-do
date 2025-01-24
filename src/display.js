@@ -19,8 +19,11 @@ export const displayProjects = (projects) => {
 }
 
 export const displayEntry = (entries) => {
-    clearEntryDisplay();
-    entries.forEach((entry) => {
+    clearEntryDisplay(); 
+
+    // entries.forEach((entry) =>
+    for (let i = 0; i < entries.length; i++) {
+        console.log(i);
             const todoDisplayDiv = document.querySelector("#to-do-display-div");
         
             const newDiv = document.createElement("div");
@@ -31,7 +34,7 @@ export const displayEntry = (entries) => {
             const titleOutputHeader = document.createElement("h3");
             const titleOutputData = document.createElement("p");
             titleOutputHeader.textContent = "Title:";
-            titleOutputData.textContent = entry.title;
+            titleOutputData.textContent = entries[i].title;
             titleOutputDiv.append(titleOutputHeader, titleOutputData);
         
             //build display container for description data
@@ -39,7 +42,7 @@ export const displayEntry = (entries) => {
             const descriptionOutputHeader = document.createElement("h3");
             const descriptionOutputData = document.createElement("p");
             descriptionOutputHeader.textContent = "Description:";
-            descriptionOutputData.textContent = entry.description;
+            descriptionOutputData.textContent = entries[i].description;
             descriptionOutputDiv.append(descriptionOutputHeader, descriptionOutputData);
         
             //build display container for due date datas
@@ -47,7 +50,7 @@ export const displayEntry = (entries) => {
             const dueDateOutputHeader = document.createElement("h3");
             const dueDateOutputData = document.createElement("p");
             dueDateOutputHeader.textContent = "Due Date:";
-            dueDateOutputData.textContent = entry.dueDate;
+            dueDateOutputData.textContent = entries[i].dueDate;
             dueDateOutputDiv.append(dueDateOutputHeader, dueDateOutputData);
         
             //build display container for priority data
@@ -55,7 +58,7 @@ export const displayEntry = (entries) => {
             const priorityOutputHeader = document.createElement("h3");
             const priorityOutputData = document.createElement("p");
             priorityOutputHeader.textContent = "Priority:";
-            priorityOutputData.textContent = entry.priority;
+            priorityOutputData.textContent = entries[i].priority;
             priorityOutputDiv.append(priorityOutputHeader, priorityOutputData);
         
             //build display container for notes data
@@ -63,7 +66,7 @@ export const displayEntry = (entries) => {
             const notesOutputHeader = document.createElement("h3");
             const notesOutputData = document.createElement("p");
             notesOutputHeader.textContent = "Notes:";
-            notesOutputData.textContent = entry.notes;
+            notesOutputData.textContent = entries[i].notes;
             notesOutputDiv.append(notesOutputHeader, notesOutputData);
         
             //build display container for checklist data
@@ -71,7 +74,7 @@ export const displayEntry = (entries) => {
             const checklistOutputHeader = document.createElement("h3");
             const checklistOutputData = document.createElement("p");
             checklistOutputHeader.textContent = "Checklist:";
-            checklistOutputData.textContent = entry.checklist;
+            checklistOutputData.textContent = entries[i].checklist;
             checklistOutputDiv.append(checklistOutputHeader, checklistOutputData);
         
             //build display container for project data
@@ -84,22 +87,25 @@ export const displayEntry = (entries) => {
             //create Delete Button
             const deleteButton = document.createElement("button");
             deleteButton.textContent = "Delete";
-            deleteButton.setAttribute("id", "delete-button");
+            deleteButton.setAttribute("class", "delete-button");
 
             //create Edit Button
             const editButton = document.createElement("button");
             editButton.textContent = "Edit";
-            editButton.setAttribute("id", "edit-button");
+            editButton.setAttribute("class", "edit-button");
 
             projectOutputHeader.textContent = "Project:";
-            projectOutputData.textContent = entry.project;
+            projectOutputData.textContent = entries[i].project;
             projectOutputDiv.append(projectOutputHeader, projectOutputData);
+
+            //assign an id value to each div corresponding to the todoList array index whose data it references
+            newDiv.setAttribute("id", i);
         
             newDiv.append(titleOutputDiv, descriptionOutputDiv, dueDateOutputDiv, priorityOutputDiv, notesOutputDiv, checklistOutputDiv, projectOutputDiv, deleteButton, editButton);
         
             todoDisplayDiv.appendChild(newDiv);
-        })
-    };
+    }
+};
 
 export const clearEntryDisplay = () => {
     const todoDisplayDiv = document.querySelector("#to-do-display-div");
