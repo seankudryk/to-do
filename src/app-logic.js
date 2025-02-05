@@ -31,8 +31,9 @@ export const createNewEntry = (title, description, dueDate, priority, notes, che
     todoList.push(newEntry);
 };
 
-export const deleteEntry = () => {
-    //click event listener called by click delete button
+export const deleteTodo = (deleteTarget) => {
+    //this will be called when a todo-display-div delete button is clicked - deleteTarget arg will be targetParentId
+    todoList.splice(deleteTarget, 1);
     // thisTodo.setAttribute.id = todoList.length - 1, or something similar
         // click on deleteButton will check the current id of it's parent toDo element and remove the corresponding index from todoList array
         // after removing this index, id attributes of each index will be set by iteratively starting from 0

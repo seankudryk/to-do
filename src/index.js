@@ -1,5 +1,5 @@
 import "./styles.css"
-import { createNewEntry, getTodoList, addProject, getProjectList, getActiveProject, setActiveProject } from "./app-logic.js";
+import { createNewEntry, getTodoList, deleteTodo, addProject, getProjectList, getActiveProject, setActiveProject } from "./app-logic.js";
 import { displayProjects, displayEntry, displaySelectOptions, clearEntryDisplay } from "./display.js";
 import { all, filter } from "neo-async";
 
@@ -111,11 +111,21 @@ testButton.addEventListener("click", () => {
 });
 
 todoDisplayDiv.addEventListener("click", (e) => {
+    let target = e.target;
+    let targetParent = target.parentNode;
+    const targetParentId = targetParent.id;
+
     const [...deleteButton] = document.querySelectorAll(".delete-button");
+    const [...editButton] = document.querySelectorAll(".edit-button");
 
     if (deleteButton.includes(target)) {
-        //remove the parent entry-div of this target delete button
-        //splice index number which matches the id value of the parent entry-div of this target delete button
-        //call displayEntry and reset display
-    };
-})
+        clearEntryDisplay();
+
+        deleteTodo(targetParentId);
+        const todoList = getTodoList();
+
+        displayEntry(todoList);
+    } else if (editButton.includes(target)) {
+                
+    }
+}) 
