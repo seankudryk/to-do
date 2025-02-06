@@ -8,14 +8,16 @@ export const displayNewProject = () => {
 }
 
 export const displayProjects = (projects) => {
+    for (let i = 0; i < projects.length; i++) {
     const userProjects = document.querySelector("#user-projects");
 
     const newSpan = document.createElement("span");
     newSpan.classList.add("project-span");
 
-    newSpan.textContent = projects[projects.length - 1];
+    newSpan.textContent = projects[i];
 
     userProjects.appendChild(newSpan);
+    }
 }
 
 export const displayEntry = (entries) => {

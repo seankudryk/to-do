@@ -1,7 +1,9 @@
 import "./styles.css"
-import { createNewEntry, getTodoList, deleteTodo, addProject, getProjectList, getActiveProject, setActiveProject } from "./app-logic.js";
+import { createNewEntry, getTodoList, deleteTodo, addProject, getProjectList, getActiveProject, setActiveProject, setStorageData } from "./app-logic.js";
 import { displayProjects, displayEntry, displaySelectOptions, clearEntryDisplay } from "./display.js";
 import { all, filter } from "neo-async";
+
+//we will be using localStorage to save the todoList, and projectList arrays - on page load, displayEntry and displaySelectOptions will need to be called in order to load the previous page state
 
 const titleInput = document.querySelector("#title-input");
 const descriptionInput = document.querySelector("#description-input");
@@ -19,11 +21,20 @@ const projectNameInput = document.querySelector("#project-name-input");
 const projectNameSubmitButton = document.querySelector("#project-name-submit-button");
 const modal = document.querySelector(".modal");
 
-const projectDisplayDiv = document.querySelector("#project-display-div");
 const userProjects = document.querySelector("#user-projects");
-const testButton = document.querySelector("#test-button");
 const todoDisplayDiv = document.querySelector("#to-do-display-div");
 
+const loadPage = () => {
+    if(!localStorage.getItem("todoListData")) {
+        setStorageData();
+        
+        const projectList = getProjectList();
+        displayProjects(projectList);
+    
+        const todoList = getTodoList();
+        displayEntry(todoList);
+    }
+}
  
 const resetInputs = () => {
     titleInput.value = "";
@@ -67,8 +78,6 @@ projectNameSubmitButton.addEventListener("click", () => {
     projectNameInput.value = "";
     displayProjects(projectList);
     displaySelectOptions(projectList[projectList.length - 1]);
-    //create a delete button within the entry with an event listener to remove the entry if clicked
-    //there will need to be a function which updates the selectable project values in HTML select element each time a new project is created
 });
 
 userProjects.addEventListener("click", (e) => {
@@ -106,10 +115,6 @@ userProjects.addEventListener("click", (e) => {
     //call display function to reset the projects listed based on the current value of activeProject
 });
 
-testButton.addEventListener("click", () => {
-    console.log(getTodoList());
-});
-
 todoDisplayDiv.addEventListener("click", (e) => {
     let target = e.target;
     let targetParent = target.parentNode;
@@ -128,4 +133,7 @@ todoDisplayDiv.addEventListener("click", (e) => {
     } else if (editButton.includes(target)) {
                 
     }
-}) 
+});
+
+loadPage();
+console.log(!localStorage.getItem("todoListData"));
