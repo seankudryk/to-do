@@ -1,6 +1,6 @@
 import "./styles.css"
 import { createNewEntry, getTodoList, deleteTodo, addProject, getProjectList, getActiveProject, setActiveProject, setStorageData } from "./app-logic.js";
-import { displayProjects, displayEntry, displaySelectOptions, clearEntryDisplay } from "./display.js";
+import { displayProjects, displayEntry, displaySelectOptions, clearEntryDisplay, clearProjectDisplay} from "./display.js";
 import { all, filter } from "neo-async";
 
 //we will be using localStorage to save the todoList, and projectList arrays - on page load, displayEntry and displaySelectOptions will need to be called in order to load the previous page state
@@ -25,7 +25,7 @@ const userProjects = document.querySelector("#user-projects");
 const todoDisplayDiv = document.querySelector("#to-do-display-div");
 
 const loadPage = () => {
-    if(!localStorage.getItem("todoListData")) {
+    if (localStorage.getItem("todoListData")) {
         setStorageData();
         
         const projectList = getProjectList();
@@ -71,11 +71,14 @@ allProjects.addEventListener("click", () => {
 });
 
 projectNameSubmitButton.addEventListener("click", () => {
+    clearProjectDisplay();
     const projectList = getProjectList();
 
     addProject(projectNameInput.value);
     modal.style.display = "none";
     projectNameInput.value = "";
+
+    //repopulate the userProjects div with all the stored project name data in projectList
     displayProjects(projectList);
     displaySelectOptions(projectList[projectList.length - 1]);
 });
@@ -136,4 +139,4 @@ todoDisplayDiv.addEventListener("click", (e) => {
 });
 
 loadPage();
-console.log(!localStorage.getItem("todoListData"));
+console.log(localStorage.getItem("todoListData"));

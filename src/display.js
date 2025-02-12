@@ -8,15 +8,15 @@ export const displayNewProject = () => {
 }
 
 export const displayProjects = (projects) => {
-    for (let i = 0; i < projects.length; i++) {
-    const userProjects = document.querySelector("#user-projects");
+        for (let i = 0; i < projects.length; i++) {
+        const userProjects = document.querySelector("#user-projects");
 
-    const newSpan = document.createElement("span");
-    newSpan.classList.add("project-span");
+        const newSpan = document.createElement("span");
+        newSpan.classList.add("project-span");
 
-    newSpan.textContent = projects[i];
+        newSpan.textContent = projects[i];
 
-    userProjects.appendChild(newSpan);
+        userProjects.appendChild(newSpan);
     }
 }
 
@@ -113,6 +113,15 @@ export const clearEntryDisplay = () => {
     while (todoDisplayDiv.firstChild) {
         todoDisplayDiv.removeChild(todoDisplayDiv.firstChild);
     }
+}
+
+export const clearProjectDisplay = () => {
+    const userProjectsDisplay = document.querySelector("#user-projects");
+
+    while (userProjectsDisplay.firstChild) {
+        userProjectsDisplay.removeChild(userProjectsDisplay.firstChild);
+    }
+
 }
 
 export const displaySelectOptions = (option) => {
