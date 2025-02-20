@@ -1,10 +1,9 @@
 import "./styles.css"
 import { createNewEntry, getTodoList, deleteTodo, addProject, getProjectList, getActiveProject, setActiveProject, setStorageData } from "./app-logic.js";
-import { displayProjects, displayEntry, displaySelectOptions, clearEntryDisplay, clearProjectDisplay} from "./display.js";
+import { displayProjects, displayEntry, displaySelectOptions, clearEntryDisplay, clearProjectDisplay, editEntry, updateEntry} from "./display.js";
 import { all, filter } from "neo-async";
 
 //we will be using localStorage to save the todoList, and projectList arrays - on page load, displayEntry and displaySelectOptions will need to be called in order to load the previous page state
-
 const titleInput = document.querySelector("#title-input");
 const descriptionInput = document.querySelector("#description-input");
 const dueDateInput = document.querySelector("#due-date-input");
@@ -12,7 +11,6 @@ const priorityInput = document.querySelector("#priority-input");
 const notesInput = document.querySelector("#notes-input");
 const checklistInput = document.querySelector("#checklist-input");
 const projectInput = document.querySelector("#project-input");
-const sideBar = document.querySelector("#sidebar");
 const submitButton = document.querySelector("#submit-button");
 
 const allProjects = document.querySelector("#all-projects");
@@ -24,12 +22,14 @@ const modal = document.querySelector(".modal");
 const userProjects = document.querySelector("#user-projects");
 const todoDisplayDiv = document.querySelector("#to-do-display-div");
 
+
 const loadPage = () => {
     if (localStorage.getItem("todoListData")) {
         setStorageData();
         
         const projectList = getProjectList();
         displayProjects(projectList);
+        displaySelectOptions(projectList);
     
         const todoList = getTodoList();
         displayEntry(todoList);
@@ -48,12 +48,19 @@ const resetInputs = () => {
 submitButton.addEventListener("click", () => {
     const todoList = getTodoList(); //getter
     let activeProject = getActiveProject();
+    console.log(activeProject);
 
-    createNewEntry(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value, notesInput.value, checklistInput.value, projectInput.value);
-    const filteredProjectEntries = todoList.filter((entry) => entry.project === activeProject);
-    displayEntry(filteredProjectEntries);
-    resetInputs();
+    if (activeProject === "All Projects") {
+        console.log(activeProject === "All Projects");
+        displayEntry(todoList);
+    } else {
+        createNewEntry(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value, notesInput.value, checklistInput.value, projectInput.value);
+        const filteredProjectEntries = todoList.filter((entry) => entry.project === activeProject);
+        displayEntry(filteredProjectEntries);
+        resetInputs();
+    }
 });
+
 
 createProjectButton.addEventListener ("click", () => {
     modal.style.display = "flex";
@@ -80,7 +87,7 @@ projectNameSubmitButton.addEventListener("click", () => {
 
     //repopulate the userProjects div with all the stored project name data in projectList
     displayProjects(projectList);
-    displaySelectOptions(projectList[projectList.length - 1]);
+    displaySelectOptions(projectList);
 });
 
 userProjects.addEventListener("click", (e) => {
@@ -121,22 +128,43 @@ userProjects.addEventListener("click", (e) => {
 todoDisplayDiv.addEventListener("click", (e) => {
     let target = e.target;
     let targetParent = target.parentNode;
-    const targetParentId = targetParent.id;
 
     const [...deleteButton] = document.querySelectorAll(".delete-button");
     const [...editButton] = document.querySelectorAll(".edit-button");
 
+    //DELETE BUTTON FUNCTIONALITY
     if (deleteButton.includes(target)) {
         clearEntryDisplay();
 
-        deleteTodo(targetParentId);
+        deleteTodo(targetParent.id);
         const todoList = getTodoList();
 
         displayEntry(todoList);
+        
+    //EDIT BUTTON FUNCTIONALITY
     } else if (editButton.includes(target)) {
-                
+        //remove all children elements from the clicked edit-button's parent node
+        while(targetParent.firstChild) {
+            targetParent.removeChild(targetParent.firstChild);
+        };
+        
+        editEntry(targetParent);
+        const confirmButton = document.querySelector("#confirm-button");
+        //forEach child div of .entryDiv, change each outputData div to an input element (maybe write a function which can overwrite the existing markup within entryDiv to re-render it)
+        // call editEntry from ./display.js
+
+        //placeholder for confirmButton event listener
+        confirmButton.addEventListener("click", () => {
+            console.log(targetParent);
+
+            while (targetParent.firstChild) {
+                targetParent.removeChild(targetParent.firstChild);
+            }
+        });
     }
 });
 
+
+
+//Without this function call, localStorage data will be ignored
 loadPage();
-console.log(localStorage.getItem("todoListData"));

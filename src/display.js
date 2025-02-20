@@ -107,6 +107,70 @@ export const displayEntry = (entries) => {
     }
 };
 
+export const editEntry = (parentDiv) => {
+    //re-create the Title div with a new input element to enter the editted data
+    const titleDiv = document.createElement("div");
+    const titleHeader = document.createElement("h3");
+    const titleInput = document.createElement("input");
+    titleHeader.textContent = "Title:";
+    titleInput.type = "text";
+    titleDiv.append(titleHeader, titleInput);
+
+    // '' Description div
+    const descriptionDiv = document.createElement("div");
+    const descriptionHeader = document.createElement("h3");
+    const descriptionInput = document.createElement("input");
+    descriptionHeader.textContent = "Description:";
+    descriptionInput.type = "text";
+    descriptionDiv.append(descriptionHeader, descriptionInput);
+
+    // '' Due Date div
+    const dueDateDiv = document.createElement("div");
+    const dueDateHeader = document.createElement("h3");
+    const dueDateInput = document.createElement("input");
+    dueDateHeader.textContent = "Due Date:";
+    dueDateInput.type = "text";
+    dueDateDiv.append(dueDateHeader, dueDateInput);
+    
+    // '' Priority div
+    const priorityDiv = document.createElement("div");
+    const priorityHeader = document.createElement("h3");
+    const priorityInput = document.createElement("input");
+    priorityHeader.textContent = "Priority:";
+    priorityInput.type = "text";
+    priorityDiv.append(priorityHeader, priorityInput);
+
+    // '' Notes div
+    const notesDiv = document.createElement("div");
+    const notesHeader = document.createElement("h3");
+    const notesInput = document.createElement("input");
+    notesHeader.textContent = "Notes:";
+    notesInput.type = "text";
+    notesDiv.append(notesHeader, notesInput);
+
+    // '' Checklist div
+    const checklistDiv = document.createElement("div");
+    const checklistHeader = document.createElement("h3");
+    const checklistInput = document.createElement("input");
+    checklistHeader.textContent = "Checklist:";
+    checklistInput.type = "text";
+    checklistDiv.append(checklistHeader, checklistInput);
+
+    // '' Project div
+
+    //confirm button
+    const confirmButton = document.createElement("button");
+    confirmButton.setAttribute("id", "confirm-button");
+    confirmButton.textContent = "Confirm";
+
+    parentDiv.append(titleDiv, descriptionDiv, dueDateDiv, priorityDiv, notesDiv, checklistDiv, confirmButton);
+}
+
+export const updateEntry = () => {
+    
+}
+
+
 export const clearEntryDisplay = () => {
     const todoDisplayDiv = document.querySelector("#to-do-display-div");
 
@@ -124,12 +188,19 @@ export const clearProjectDisplay = () => {
 
 }
 
-export const displaySelectOptions = (option) => {
+export const displaySelectOptions = (options) => {
     const projectSelector = document.querySelector("#project-input");
 
-    const newOption = document.createElement("option");
-    // newOption.setAttribute("id", `${option}`);
-    newOption.textContent = `${option}`;
+    while (projectSelector.firstChild) {
+        projectSelector.removeChild(projectSelector.firstChild);
+    }
 
-    projectSelector.appendChild(newOption);
-}
+    options.forEach((option) => {
+
+        const newOption = document.createElement("option");
+        // newOption.setAttribute("id", `${option}`);
+        newOption.textContent = `${option}`;
+
+        projectSelector.appendChild(newOption);
+    });
+};
